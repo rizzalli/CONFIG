@@ -1,0 +1,74 @@
+2025-11-05 10:49:25.261 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2025-11-05 10:49:42.650 ERROR (MainThread) [homeassistant.core] Error running job: <Job onetime listen homeassistant_start <function _async_at_core_state.<locals>._matched_event at 0x7f75c931a0> HassJobType.Callback <_OneTimeListener homeassistant.helpers.start:<function _async_at_core_state.<locals>._matched_event at 0x7f75c931a0>>>
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/core.py", line 1575, in async_fire_internal
+    self._hass.async_run_hass_job(job, event)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/src/homeassistant/homeassistant/core.py", line 937, in async_run_hass_job
+    hassjob.target(*args)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/usr/src/homeassistant/homeassistant/core.py", line 1436, in __call__
+    self.hass.async_run_hass_job(self.listener_job, event)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/homeassistant/homeassistant/core.py", line 937, in async_run_hass_job
+    hassjob.target(*args)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/usr/src/homeassistant/homeassistant/helpers/start.py", line 44, in _matched_event
+    hass.async_run_hass_job(at_start_job, hass)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/homeassistant/homeassistant/core.py", line 937, in async_run_hass_job
+    hassjob.target(*args)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/usr/src/homeassistant/homeassistant/components/group/entity.py", line 101, in _update_at_start
+    self.async_update_group_state()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/src/homeassistant/homeassistant/components/group/sensor.py", line 452, in async_update_group_state
+    self._extra_state_attribute, self._attr_native_value = self._state_calc(
+                                                           ~~~~~~~~~~~~~~~~^
+        sensor_values
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/src/homeassistant/homeassistant/components/group/sensor.py", line 237, in calc_median
+    value: float = statistics.median(result)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/usr/local/lib/python3.13/statistics.py", line 637, in median
+    raise StatisticsError("no median for empty data")
+statistics.StatisticsError: no median for empty data
+2025-11-05 10:54:53.200 ERROR (MainThread) [homeassistant.components.websocket_api.http.connection] [546880281696] Error handling message: Unknown error (unknown_error) Derryn Rizzalli from 10.1.1.28 (Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36)
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/components/websocket_api/connection.py", line 237, in async_handle
+    handler(self.hass, self, schema(msg))
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/homeassistant/homeassistant/components/group/config_flow.py", line 443, in ws_start_preview
+    connection.subscriptions[msg["id"]] = preview_entity.async_start_preview(
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        async_preview_updated
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/src/homeassistant/homeassistant/components/group/entity.py", line 68, in async_start_preview
+    async_state_changed_listener(None)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/src/homeassistant/homeassistant/components/group/entity.py", line 60, in async_state_changed_listener
+    self.async_update_group_state()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/src/homeassistant/homeassistant/components/group/sensor.py", line 452, in async_update_group_state
+    self._extra_state_attribute, self._attr_native_value = self._state_calc(
+                                                           ~~~~~~~~~~~~~~~~^
+        sensor_values
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/src/homeassistant/homeassistant/components/group/sensor.py", line 237, in calc_median
+    value: float = statistics.median(result)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/usr/local/lib/python3.13/statistics.py", line 637, in median
+    raise StatisticsError("no median for empty data")
+statistics.StatisticsError: no median for empty data
+2025-11-05 10:55:03.492 ERROR (MainThread) [homeassistant.core] Unable to remove unknown job listener (<Job onetime listen homeassistant_start <function _async_at_core_state.<locals>._matched_event at 0x7f75c931a0> HassJobType.Callback <_OneTimeListener homeassistant.helpers.start:<function _async_at_core_state.<locals>._matched_event at 0x7f75c931a0>>>, None)
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/core.py", line 1730, in _async_remove_listener
+    self._listeners[event_type].remove(filterable_job)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+ValueError: list.remove(x): x not in list

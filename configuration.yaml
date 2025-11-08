@@ -1,0 +1,79 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+
+#allow cloudflare tunnel
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    # The HA add-on/Supervisor docker network (covers 172.30.32.* and 172.30.33.*)
+    - 172.30.32.0/23
+    # (Optional belt-and-braces: the exact proxy IP HA complained about)
+    - 172.30.33.1
+    # If cloudflared runs on the same host and targets localhost:
+    - 127.0.0.1
+    # If your tunnel/proxy runs on another box, add THAT host or its subnet too, e.g.:
+    # - 10.1.1.0/24
+
+
+#include templates.yaml file
+template: !include templates.yaml
+
+# Example configuration.yaml entry
+usage_prediction:
+
+#load automation
+automation: !include automations.yaml
+
+#Themes
+#resources:
+#  - url: /local/mini-graph-card-bundle.js?v=0.13.0
+ #   type: module
+
+
+#influxBD
+#influxdb:
+#  host: 10.1.5.10
+#  port: 8086
+#  database: homeassistant
+#  username: homeassistant
+#  password: homeassistant
+#  max_retries: 3
+#  default_measurement: state
+#  ssl: false
+#  verify_ssl: false
+#  tags:
+#    source: HA
+#  tags_attributes:
+#    - friendly_name
+#    - unit_of_measurement
+
+
+#Cloudflare to allow redirect and proxies
+#http:
+#  ssl_certificate: /ssl/Fullchain.pem
+#  ssl_key: /ssl/privkey.pem
+#  trusted_proxies:
+#    -  172.30.32.0/24
+#    -  172.30.33.1
+#    -  127.0.0.1
+#  use_x_forwarded_for: true
+
+
+frontend:
+  extra_module_url:
+    - /local/card-mod.js
+
+
+
+
+
+
+
+
+
+
+
+
+        

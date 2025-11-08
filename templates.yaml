@@ -1,0 +1,28 @@
+#templates.yaml
+#moved from main configuration.yaml
+
+#Humidity and temp sensor from sensibo
+  - sensor:
+      - name: "Living Room Humidity"
+        unique_id: living_room_air_conditioner_humidity1
+        device_class: humidity
+        unit_of_measurement: "%"
+        state: "{{ state_attr('climate.living_room_air_conditioner', 'current_humidity') }}"
+  - sensor:    
+      - name: "Living Room Temp"
+        device_class: temperature
+        unique_id: living_room_air_conditioner_temp1
+        unit_of_measurement: "°C"
+        state: "{{ state_attr('climate.living_room_air_conditioner', 'current_temperature') }}"
+  - sensor:
+      - name: "Living Room Humidity2"
+        device_class: humidity
+        unique_id: living_room_air_conditioner_humidity2
+        unit_of_measurement: "%"
+        state: "{{ state_attr('climate.living_room_air_conditioner', 'current_humidity') }}"
+  - sensor:    
+      - name: "Living Room Temp2"
+        device_class: temperature
+        unique_id: living_room_air_conditioner_temp2
+        unit_of_measurement: "°C"
+        state: "{{ state_attr('climate.living_room_air_conditioner', 'current_temperature') }}"

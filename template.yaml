@@ -1,0 +1,19 @@
+# template.yaml
+
+- sensor:
+    - name: "Air Quality"
+      unique_id: vesync_air_quality
+      state: "{{ state_attr('fan.living_room_air_purifer', 'air_quality') }}"
+
+    - name: "Filter Life"
+      unique_id: vesync_filter_life
+      unit_of_measurement: "%"
+      state: "{{ state_attr('fan.living_room_air_purifer', 'filter_life') }}"
+
+    - name: "Mode"
+      unique_id: vesync_mode
+      state: "{{ state_attr('fan.living_room_air_purifer', 'mode') }}"
+
+    - name: "Screen Status"
+      unique_id: vesync_screen_status
+      state: "{{ state_attr('fan.living_room_air_purifer', 'screen_status') }}"

@@ -1,0 +1,4 @@
+.storage/
+secrets.yaml
+*.pem
+*.key

@@ -1,0 +1,72 @@
+- id: '1760845847958'
+  name: New scene
+  entities: {}
+  metadata: {}
+- id: '1761948825297'
+  name: Temperature Theme
+  entities: {}
+  metadata: {}
+- id: '1761948922264'
+  name: New scene
+  entities:
+    update.mini_graph_card_update:
+      auto_update: false
+      display_precision: 0
+      installed_version: v0.13.0
+      in_progress: false
+      latest_version: v0.13.0
+      release_summary:
+      release_url: https://github.com/kalkih/mini-graph-card/releases/v0.13.0
+      skipped_version:
+      title:
+      update_percentage:
+      friendly_name: mini-graph-card update
+      supported_features: 23
+      state: 'off'
+    climate.living_room_air_conditioner:
+      hvac_modes:
+      - cool
+      - heat
+      - dry
+      - heat_cool
+      - fan_only
+      - 'off'
+      min_temp: 16
+      max_temp: 31
+      target_temp_step: 1
+      fan_modes:
+      - quiet
+      - low
+      - medium
+      - medium_high
+      - high
+      - auto
+      - strong
+      swing_modes:
+      - stopped
+      - fixedtop
+      - fixedmiddletop
+      - fixedmiddle
+      - fixedmiddlebottom
+      - fixedbottom
+      - rangefull
+      swing_horizontal_modes:
+      - fixedcenter
+      - fixedcenterleft
+      - fixedcenterright
+      - fixedleft
+      - fixedright
+      - stopped
+      - rangefull
+      current_temperature: 21.8
+      temperature: 19
+      current_humidity: 79.1
+      fan_mode: auto
+      swing_mode: stopped
+      swing_horizontal_mode: rangefull
+      friendly_name: Climate Control
+      supported_features: 937
+      state: 'off'
+  metadata:
+    climate.living_room_air_conditioner:
+      entity_only: true

@@ -1,0 +1,28 @@
+heat_on:
+  sequence:
+  - action: button.press
+    metadata: {}
+    data: {}
+    target:
+      area_id: home
+  - device_id: 10179f81b2413ed1d86a7a281138e8f1
+    domain: climate
+    entity_id: cf3db5b53ac9f82b9dd7f7a8a763e4a7
+    type: set_hvac_mode
+    hvac_mode: heat
+  alias: Heat On
+  description: Turns on heat
+heat_on_duplicate:
+  sequence:
+  - action: button.press
+    metadata: {}
+    data: {}
+    target:
+      area_id: home
+  - device_id: 10179f81b2413ed1d86a7a281138e8f1
+    domain: climate
+    entity_id: cf3db5b53ac9f82b9dd7f7a8a763e4a7
+    type: set_hvac_mode
+    hvac_mode: 'off'
+  alias: Heat On (Duplicate)
+  description: Turns off heat

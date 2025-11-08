@@ -1,0 +1,144 @@
+- id: '1762409450745'
+  alias: Derryn Leaves
+  description: ''
+  triggers:
+  - trigger: zone
+    entity_id: person.derryn_rizzalli
+    zone: zone.home
+    event: leave
+  conditions: []
+  actions:
+  - parallel:
+    - sequence:
+      - action: fan.set_percentage
+        metadata: {}
+        data:
+          percentage: 100
+        target:
+          device_id: c6c759a3bbad55083ec92fe4f1b31966
+      - action: timer.start
+        metadata: {}
+        data:
+          duration: 02:00:00
+        target:
+          entity_id: timer.purifier_auto_timer
+      - action: fan.set_preset_mode
+        metadata: {}
+        data:
+          preset_mode: auto
+        target:
+          device_id: c6c759a3bbad55083ec92fe4f1b31966
+    - action: light.turn_off
+      metadata: {}
+      data: {}
+      target:
+        entity_id: light.all_lights
+    - action: media_player.turn_off
+      metadata: {}
+      data: {}
+      target:
+        entity_id: media_player.bravia_k_65xr70
+  mode: single
+- id: '1762551448042'
+  alias: New automation
+  description: ''
+  triggers:
+  - trigger: zone
+    entity_id: person.derryn_rizzalli
+    zone: zone.home
+    event: enter
+  conditions:
+  - condition: state
+    entity_id: timer.purifier_auto_timer
+    state:
+    - active
+  actions:
+  - parallel:
+    - action: fan.set_preset_mode
+      metadata: {}
+      data:
+        preset_mode: auto
+      target:
+        device_id: c6c759a3bbad55083ec92fe4f1b31966
+    - action: timer.cancel
+      metadata: {}
+      data: {}
+      target:
+        entity_id: timer.purifier_auto_timer
+  mode: single
+- id: '1762566029082'
+  alias: Light Sequence
+  description: ''
+  triggers:
+  - trigger: event
+    event_type: Button Press
+    context:
+      user_id:
+      - a9a4bcd0abdc4eea9d12c114afac749d
+    event_data:
+      platform: state
+      entity_id: input_button.light_sequence
+  conditions: []
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.floor_lamp
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 900
+  - action: light.turn_on
+    metadata: {}
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.desk_lamp
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 900
+  - action: light.turn_on
+    metadata: {}
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.kitchen_bench
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 900
+  - action: light.turn_on
+    metadata: {}
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.kitchen_strip
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 900
+  - action: light.turn_on
+    metadata: {}
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.tv_light
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 900
+  - action: light.turn_on
+    metadata: {}
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.bedroom
+  mode: single

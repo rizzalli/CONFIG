@@ -1,0 +1,13 @@
+{
+    "body": {
+        "contact": [],
+        "key": {
+            "e": "AQAB",
+            "kty": "RSA",
+            "n": "j77dz-2xAXj9nAZVplvbOe7TY1U7r4kSCflotMOzAKASwAXpoJQ2GsKvAhDvXA-jtHidIr-t9qM8bYChRvToh080zI9XjRRsl3oqR67VsllHuNVGVirjHTXumQ-zGrKoUNw2vkn4Lm278ERd5693lVi_ZAngmsbowPrTFaOpP3frEroEBazVp_s7BgNwwA2vr25QIATA-onrqiu9E_bI1BGbhr8eOz6cqsQoBtJx4_nR8KRZwlpagMP8r_G9GftNoAraZLTTEBKZdkKnJpTRqdQKZsAkYYkUxCXlHqvIKqmvVrX8gU1o07tDLagTEYV4wvwgPSNwKDgLDADe-FJI0Q"
+        },
+        "status": "valid"
+    },
+    "terms_of_service": "https://letsencrypt.org/documents/LE-SA-v1.5-February-24-2025.pdf",
+    "uri": "https://acme-v02.api.letsencrypt.org/acme/acct/2728640151"
+}
