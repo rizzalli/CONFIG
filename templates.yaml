@@ -45,7 +45,8 @@
         icon: mdi:alert-circle
         unit_of_measurement: "entities"
         state: >-
-          {{ states | selectattr('state', 'in', ['unavailable', 'unknown']) | list | count }}
+          {{ states | rejectattr('entity_id', 'in', ['sensor.unavailable_entities', 'sensor.unavailable_entities_2']) 
+             | selectattr('state', 'in', ['unavailable', 'unknown']) | list | count }}
 
       - name: "Automations Off"
         unique_id: vesync_automations_off_count
@@ -82,51 +83,4 @@
             else state_attr('fan.living_room_air_purifer', 'screen_status')
           }}
 
-  # Proxy fan to avoid preset-mode errors when adjusting percentage
-  # This exposes a percentage-only fan that wraps the real purifier.
-  # Use this entity in dashboards to adjust speed without triggering
-  # invalid preset_mode messages from the UI.
-  - fan:
-      - name: "Living Room Air Purifier (Proxy)"
-        unique_id: living_room_air_purifier_proxy
-        availability_template: >-
-          {{
-            states('fan.living_room_air_purifier') not in ['unavailable', 'unknown']
-            or states('fan.living_room_air_purifer') not in ['unavailable', 'unknown']
-          }}
-        # Mirror the on/off state of the underlying fan
-        state: >-
-          {{
-            states('fan.living_room_air_purifier')
-            if states('fan.living_room_air_purifier') != 'unavailable'
-            else states('fan.living_room_air_purifer')
-          }}
-        # Expose only percentage control; do NOT expose preset_modes here
-        percentage_template: >-
-          {{
-            (state_attr('fan.living_room_air_purifier', 'percentage')
-             if state_attr('fan.living_room_air_purifier', 'percentage') is not none
-             else state_attr('fan.living_room_air_purifer', 'percentage')) or 0
-          }}
-        turn_on:
-          service: fan.turn_on
-          data:
-            entity_id: >-
-              {{ 'fan.living_room_air_purifier'
-                 if states('fan.living_room_air_purifier') != 'unavailable'
-                 else 'fan.living_room_air_purifer' }}
-        turn_off:
-          service: fan.turn_off
-          data:
-            entity_id: >-
-              {{ 'fan.living_room_air_purifier'
-                 if states('fan.living_room_air_purifier') != 'unavailable'
-                 else 'fan.living_room_air_purifer' }}
-        set_percentage:
-          service: fan.set_percentage
-          data:
-            entity_id: >-
-              {{ 'fan.living_room_air_purifier'
-                 if states('fan.living_room_air_purifier') != 'unavailable'
-                 else 'fan.living_room_air_purifer' }}
-            percentage: "{{ percentage }}"
+
