@@ -177,21 +177,13 @@
         {{ (trigger.event.data.service_data.entity_id == 'fan.living_room_air_purifier') or
            (trigger.event.data.service_data.entity_id == 'fan.living_room_air_purifer') }}
   actions:
-    - variables:
-        requested: "{{ trigger.event.data.service_data.preset_mode }}"
-        prev_pct: >-
-          {{ state_attr('fan.living_room_air_purifier','percentage')
-             if state_attr('fan.living_room_air_purifier','percentage') is not none
-             else state_attr('fan.living_room_air_purifer','percentage') }}
-        prev_preset: >-
-          {{ state_attr('fan.living_room_air_purifier','preset_mode')
-             if state_attr('fan.living_room_air_purifier','preset_mode') is not none
-             else state_attr('fan.living_room_air_purifer','preset_mode') }}
     - service: persistent_notification.create
       data:
         title: "Purifier preset request"
         message: >-
-          Requested preset: {{ requested }}\nPrevious preset: {{ prev_preset or 'none' }}\nPrevious percentage: {{ prev_pct if prev_pct is not none else 'none' }}
+          Requested preset: {{ trigger.event.data.service_data.preset_mode }}
+          Previous preset: {{ state_attr('fan.living_room_air_purifier','preset_mode') or state_attr('fan.living_room_air_purifer','preset_mode') or 'none' }}
+          Previous percentage: {{ state_attr('fan.living_room_air_purifier','percentage') or state_attr('fan.living_room_air_purifer','percentage') or 'none' }}
 
 # Mitigation: smooth manual -> preset transition to reduce invalid preset warnings
 - id: air_purifier_preset_fix
@@ -211,24 +203,19 @@
            (state_attr('fan.living_room_air_purifier','percentage') not in [None, 0] or
             state_attr('fan.living_room_air_purifer','percentage') not in [None, 0]) }}
   actions:
-    - variables:
-        target_entity: >-
-          {{ 'fan.living_room_air_purifier' if states('fan.living_room_air_purifier') != 'unavailable' else 'fan.living_room_air_purifer' }}
-        requested_preset: "{{ trigger.event.data.service_data.preset_mode }}"
-    # Step 1: briefly set percentage to 0 (some integrations treat this as clearing manual speed)
     - service: fan.set_percentage
       data:
-        entity_id: "{{ target_entity }}"
+        entity_id: >-
+          {{ 'fan.living_room_air_purifier' if states('fan.living_room_air_purifier') != 'unavailable' else 'fan.living_room_air_purifer' }}
         percentage: 0
     - delay: '00:00:01'
-    # Step 2: apply requested preset again
     - service: fan.set_preset_mode
       data:
-        entity_id: "{{ target_entity }}"
-        preset_mode: "{{ requested_preset }}"
-    # Optional: notify for traceability (can be removed later)
+        entity_id: >-
+          {{ 'fan.living_room_air_purifier' if states('fan.living_room_air_purifier') != 'unavailable' else 'fan.living_room_air_purifer' }}
+        preset_mode: "{{ trigger.event.data.service_data.preset_mode }}"
     - service: persistent_notification.create
       data:
         title: "Purifier preset fix applied"
         message: >-
-          Re-applied preset '{{ requested_preset }}' after clearing manual percentage.
+          Re-applied preset '{{ trigger.event.data.service_data.preset_mode }}' after clearing manual percentage.
