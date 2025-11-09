@@ -6,6 +6,11 @@ default_config:
 recorder:
   db_url: !secret mariadb_url
 
+#git push script
+shell_command:
+  git_sync: /bin/bash /config/.scripts/git_sync.sh
+
+
 #allow cloudflare tunnel
 http:
   use_x_forwarded_for: true
