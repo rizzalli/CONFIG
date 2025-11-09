@@ -73,6 +73,42 @@ automation: !include automations.yaml
 frontend:
   extra_module_url:
     - /local/card-mod.js
+  themes: !include_dir_merge_named themes
+
+# Lovelace dashboards
+lovelace:
+  mode: storage  # Keep your existing UI-created dashboards
+  resources:
+    - url: /local/mini-graph-card-bundle.js
+      type: module
+    - url: /hacsfiles/lovelace-card-mod/card-mod.js
+      type: module
+    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+      type: module
+    - url: /hacsfiles/room-summary-card/room-summary-card.js
+      type: module
+    - url: /hacsfiles/lovelace-layout-card/layout-card.js
+      type: module
+  # Add YAML-based test dashboards
+  dashboards:
+    lovelace-minimalist:
+      mode: yaml
+      title: Minimalist
+      icon: mdi:view-compact
+      show_in_sidebar: true
+      filename: dashboards/home-minimalist.yaml
+    lovelace-cards:
+      mode: yaml
+      title: Card Based
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
+      filename: dashboards/home-card-based.yaml
+    lovelace-functional:
+      mode: yaml
+      title: Functional
+      icon: mdi:view-grid
+      show_in_sidebar: true
+      filename: dashboards/home-functional.yaml
 
 
 

@@ -1,0 +1,70 @@
+# Optional Helper Entities for Enhanced Dashboard Functionality
+
+# Add these to configuration.yaml if you want additional functionality
+
+# Timer for bedroom reading mode
+timer:
+  bedroom_reading_timer:
+    name: Bedroom Reading Auto-off
+    duration: "00:30:00"
+    icon: mdi:book-open-page-variant
+
+# Input select for kitchen lighting scenes
+input_select:
+  kitchen_scene:
+    name: Kitchen Scene
+    options:
+      - "Cooking"
+      - "Dining"
+      - "Ambient"
+      - "Off"
+    icon: mdi:lightbulb-group
+
+# Input boolean for movie mode
+input_boolean:
+  movie_mode:
+    name: Movie Mode
+    icon: mdi:movie
+
+# Input number for default brightness
+input_number:
+  default_brightness:
+    name: Default Light Brightness
+    initial: 80
+    min: 1
+    max: 100
+    step: 1
+    unit_of_measurement: "%"
+    icon: mdi:brightness-6
+
+# Scenes (add to scenes.yaml)
+# - id: cooking_mode
+#   name: Cooking Mode
+#   entities:
+#     light.kitchen_bench:
+#       state: on
+#       brightness: 255
+#     light.kitchen_strip:
+#       state: on
+#       brightness: 255
+
+# - id: movie_mode
+#   name: Movie Mode
+#   entities:
+#     light.tv_light:
+#       state: on
+#       brightness: 25
+#     light.floor_lamp:
+#       state: off
+#     media_player.bravia_k_65xr70:
+#       state: on
+
+# - id: good_night
+#   name: Good Night
+#   entities:
+#     light.all_lights:
+#       state: off
+#     climate.living_room_air_conditioner:
+#       state: off
+#     media_player.bravia_k_65xr70:
+#       state: off

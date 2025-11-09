@@ -1,0 +1,371 @@
+# Functional Dashboard - Focus on Practicality
+# Organized by function rather than decoration
+
+title: Home
+views:
+  - title: Control Center
+    path: home
+    icon: mdi:home-assistant
+    cards:
+      # Master Controls Section
+      - type: entities
+        title: 🎛️ Master Controls
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - entity: light.all_lights
+            name: All Lights
+            icon: mdi:lightbulb-group
+          - entity: input_button.light_sequence
+            name: Activate Light Sequence
+            icon: mdi:lightbulb-multiple
+          - entity: media_player.bravia_k_65xr70
+            name: Main TV
+          - type: divider
+
+      # Climate Management
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: 🌡️ Climate Management
+            entities:
+              - entity: climate.living_room_air_conditioner
+                name: Air Conditioner
+              - entity: sensor.living_room_temp
+                name: Current Temperature
+              - entity: sensor.living_room_humidity
+                name: Current Humidity
+          
+          - type: thermostat
+            entity: climate.living_room_air_conditioner
+
+      # Air Quality Management
+      - type: entities
+        title: 💨 Air Quality
+        entities:
+          - entity: fan.living_room_air_purifer
+            name: Air Purifier
+          - entity: sensor.air_quality
+            name: Air Quality Level
+          - entity: sensor.filter_life
+            name: Filter Life Remaining
+          - entity: timer.purifier_auto_timer
+            name: Auto-off Timer
+
+      # Room Navigation & Quick Access
+      - type: grid
+        title: 📍 Go to Room
+        columns: 3
+        square: false
+        cards:
+          - type: button
+            name: Kitchen
+            icon: mdi:silverware-fork-knife
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/kitchen
+            card_mod:
+              style: |
+                ha-card {
+                  height: 100px;
+                }
+
+          - type: button
+            name: Living Room
+            icon: mdi:sofa
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/living-room
+            card_mod:
+              style: |
+                ha-card {
+                  height: 100px;
+                }
+
+          - type: button
+            name: Bedroom
+            icon: mdi:bed
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/bedroom
+            card_mod:
+              style: |
+                ha-card {
+                  height: 100px;
+                }
+
+      # All Lights - Area Level Control
+      - type: entities
+        title: 💡 Lighting - Room Level
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - type: custom:fold-entity-row
+            head:
+              entity: light.kitchen_bench
+              name: Kitchen
+              icon: mdi:silverware-fork-knife
+            entities:
+              - entity: light.kitchen_bench
+                name: Bench Light
+              - entity: light.kitchen_strip
+                name: Strip Light
+            
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Living Room
+            entities:
+              - entity: light.floor_lamp
+                name: Floor Lamp
+              - entity: light.tv_light
+                name: TV Light
+          
+          - entity: light.bedroom
+            name: Bedroom
+            icon: mdi:bed
+
+  # Kitchen - Functional Layout
+  - title: Kitchen
+    path: kitchen
+    icon: mdi:silverware-fork-knife
+    badges:
+      - entity: sensor.living_room_temp
+      - entity: sensor.living_room_humidity
+    cards:
+      # Quick Actions Bar
+      - type: horizontal-stack
+        cards:
+          - type: button
+            icon: mdi:arrow-left
+            name: Back
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/home
+          
+          - type: button
+            name: All On
+            icon: mdi:lightbulb-on
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id:
+                  - light.kitchen_bench
+                  - light.kitchen_strip
+                brightness_pct: 100
+          
+          - type: button
+            name: All Off
+            icon: mdi:lightbulb-off
+            tap_action:
+              action: call-service
+              service: light.turn_off
+              service_data:
+                entity_id:
+                  - light.kitchen_bench
+                  - light.kitchen_strip
+
+      # Individual Fixture Controls
+      - type: light
+        entity: light.kitchen_bench
+        name: Bench Light
+
+      - type: light
+        entity: light.kitchen_strip
+        name: Strip Light
+
+      # Preset Scenes
+      - type: entities
+        title: Lighting Presets
+        entities:
+          - type: button
+            name: Bright (Cooking)
+            icon: mdi:chef-hat
+            action_name: Activate
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id:
+                  - light.kitchen_bench
+                  - light.kitchen_strip
+                brightness_pct: 100
+
+          - type: button
+            name: Medium (Dining)
+            icon: mdi:food
+            action_name: Activate
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id:
+                  - light.kitchen_bench
+                  - light.kitchen_strip
+                brightness_pct: 60
+
+          - type: button
+            name: Low (Ambient)
+            icon: mdi:candle
+            action_name: Activate
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id:
+                  - light.kitchen_bench
+                  - light.kitchen_strip
+                brightness_pct: 20
+
+  # Living Room - Functional Layout
+  - title: Living Room
+    path: living-room
+    icon: mdi:sofa
+    badges:
+      - entity: sensor.living_room_temp
+      - entity: sensor.living_room_humidity
+      - entity: sensor.air_quality
+      - entity: sensor.filter_life
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: button
+            icon: mdi:arrow-left
+            name: Back
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/home
+          
+          - type: button
+            name: Movie Mode
+            icon: mdi:movie
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              service_data:
+                entity_id: script.movie_mode
+
+      # Lighting
+      - type: entities
+        title: Lighting Controls
+        entities:
+          - type: custom:slider-entity-row
+            entity: light.floor_lamp
+            name: Floor Lamp
+            toggle: true
+
+          - type: custom:slider-entity-row
+            entity: light.tv_light
+            name: TV Light
+            toggle: true
+
+      # Entertainment
+      - type: media-control
+        entity: media_player.bravia_k_65xr70
+
+      # Climate
+      - type: thermostat
+        entity: climate.living_room_air_conditioner
+        name: Climate Control
+
+      # Air Purifier
+      - type: entities
+        title: Air Purifier
+        show_header_toggle: true
+        toggle_entity: fan.living_room_air_purifer
+        entities:
+          - entity: fan.living_room_air_purifer
+            name: Power
+          - entity: sensor.air_quality
+            name: Air Quality
+          - entity: sensor.filter_life
+            name: Filter Life
+          - entity: sensor.mode
+            name: Current Mode
+          - entity: timer.purifier_auto_timer
+            name: Auto Timer
+
+  # Bedroom - Functional Layout
+  - title: Bedroom
+    path: bedroom
+    icon: mdi:bed
+    badges:
+      - entity: sensor.living_room_temp
+      - entity: sensor.living_room_humidity
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: button
+            icon: mdi:arrow-left
+            name: Back
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/home
+          
+          - type: button
+            name: Good Night
+            icon: mdi:weather-night
+            tap_action:
+              action: call-service
+              service: light.turn_off
+              service_data:
+                entity_id: light.all_lights
+
+      # Main Light Control
+      - type: light
+        entity: light.bedroom
+        name: Bedroom Light
+
+      # Bedroom Scenes
+      - type: grid
+        columns: 2
+        cards:
+          - type: button
+            name: Reading
+            icon: mdi:book-open-page-variant
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id: light.bedroom
+                brightness_pct: 70
+
+          - type: button
+            name: Sleep
+            icon: mdi:sleep
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id: light.bedroom
+                brightness_pct: 5
+                kelvin: 2200
+
+          - type: button
+            name: Wake Up
+            icon: mdi:weather-sunny
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id: light.bedroom
+                brightness_pct: 100
+
+          - type: button
+            name: Off
+            icon: mdi:lightbulb-off
+            tap_action:
+              action: call-service
+              service: light.turn_off
+              service_data:
+                entity_id: light.bedroom
+
+      # Climate Info
+      - type: glance
+        title: Climate
+        entities:
+          - entity: sensor.living_room_temp
+            name: Temp
+          - entity: sensor.living_room_humidity
+            name: Humidity

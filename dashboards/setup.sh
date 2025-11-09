@@ -1,0 +1,23 @@
+#!/bin/bash
+# Quick Setup Script for Dashboards
+
+echo "🚀 Setting up Home Assistant Dashboards..."
+echo ""
+echo "✅ Dashboard files created in /config/dashboards/"
+echo "✅ Configuration updated in configuration.yaml"
+echo ""
+echo "📋 Next steps:"
+echo "1. Restart Home Assistant to load the new dashboards"
+echo "2. After restart, you'll see 3 new dashboards in the sidebar:"
+echo "   - Minimalist (compact view icon)"
+echo "   - Card Based (dashboard icon)"
+echo "   - Functional (grid icon)"
+echo ""
+echo "3. Test each dashboard for a few days"
+echo "4. Note what you like/dislike about each"
+echo ""
+echo "⚠️  Note: Some cards may show 'Entity not available' until template sensors are loaded"
+echo ""
+echo "🔧 To restart Home Assistant:"
+echo "   Settings → System → Restart"
+echo ""
