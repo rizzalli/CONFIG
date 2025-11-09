@@ -9,6 +9,7 @@ recorder:
 #git push script
 shell_command:
   git_sync: /bin/bash /config/.scripts/git_sync.sh
+  ha_maintenance: /bin/bash /config/.scripts/maintenance.sh
 
 
 #allow cloudflare tunnel
