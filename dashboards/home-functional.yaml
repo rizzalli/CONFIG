@@ -16,9 +16,6 @@ views:
           - entity: light.all_lights
             name: All Lights
             icon: mdi:lightbulb-group
-          - entity: input_button.light_sequence
-            name: Activate Light Sequence
-            icon: mdi:lightbulb-multiple
           - entity: media_player.bravia_k_65xr70
             name: Main TV
           - type: divider

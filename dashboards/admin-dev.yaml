@@ -276,11 +276,6 @@ views:
             name: Test Light Sequence
             icon: mdi:lightbulb-multiple
             action_name: Test
-            tap_action:
-              action: call-service
-              service: button.press
-              service_data:
-                entity_id: input_button.light_sequence
 
           - type: button
             name: All Lights OFF

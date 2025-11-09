@@ -75,9 +75,6 @@
     context:
       user_id:
       - a9a4bcd0abdc4eea9d12c114afac749d
-    event_data:
-      platform: state
-      entity_id: input_button.light_sequence
   conditions: []
   actions:
   - action: light.turn_on

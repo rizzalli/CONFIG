@@ -20,16 +20,6 @@ views:
               action: more-info
           
           - type: button
-            entity: input_button.light_sequence
-            name: Light Show
-            icon: mdi:lightbulb-multiple
-            tap_action:
-              action: call-service
-              service: button.press
-              service_data:
-                entity_id: input_button.light_sequence
-          
-          - type: button
             entity: media_player.bravia_k_65xr70
             name: TV
             icon: mdi:television
