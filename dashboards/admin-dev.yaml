@@ -1,0 +1,342 @@
+# Admin & Development Dashboard
+# Quick access to system controls, git sync, and development tools
+
+title: Admin & Dev
+views:
+  - title: System Control
+    path: admin
+    icon: mdi:tools
+    badges:
+      - entity: sensor.processor_use
+      - entity: sensor.memory_use_percent
+      - entity: sensor.disk_use_percent
+    cards:
+      # Quick Actions
+      - type: entities
+        title: 🔧 System Actions
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - type: button
+            name: Git Sync (Pull & Push)
+            icon: mdi:git
+            action_name: Run
+            tap_action:
+              action: call-service
+              service: shell_command.git_sync
+              confirmation:
+                text: This will sync your config with GitHub. Continue?
+
+          - type: button
+            name: System Maintenance
+            icon: mdi:wrench
+            action_name: Run
+            tap_action:
+              action: call-service
+              service: shell_command.ha_maintenance
+              confirmation:
+                text: Run maintenance script?
+
+          - type: button
+            name: Restart Home Assistant
+            icon: mdi:restart
+            action_name: Restart
+            tap_action:
+              action: call-service
+              service: homeassistant.restart
+              confirmation:
+                text: Are you sure you want to restart Home Assistant?
+
+          - type: button
+            name: Reload Automations
+            icon: mdi:autorenew
+            action_name: Reload
+            tap_action:
+              action: call-service
+              service: automation.reload
+
+          - type: button
+            name: Reload Scripts
+            icon: mdi:script-text
+            action_name: Reload
+            tap_action:
+              action: call-service
+              service: script.reload
+
+          - type: button
+            name: Reload Templates
+            icon: mdi:file-code
+            action_name: Reload
+            tap_action:
+              action: call-service
+              service: template.reload
+
+      # Git Status Info (if you add git sensor)
+      - type: markdown
+        title: 📋 Git Info
+        content: |
+          **Branch:** main
+          **Last Sync:** Check automation history
+          
+          **Quick Git Commands:**
+          - Use "Git Sync" button above to pull/push
+          - Auto-sync runs on HA start & nightly at 2 AM
+
+      # Current Automations Status
+      - type: entities
+        title: 🤖 Automation Status
+        show_header_toggle: false
+        entities:
+          - entity: automation.derryn_leaves
+            name: Derryn Leaves Home
+            secondary_info: last-triggered
+          - entity: automation.new_automation
+            name: Derryn Returns Home
+            secondary_info: last-triggered
+          - entity: automation.light_sequence
+            name: Light Sequence
+            secondary_info: last-triggered
+          - entity: automation.git_auto_sync_on_ha_start
+            name: Git Sync on Start
+            secondary_info: last-triggered
+          - entity: automation.git_auto_sync_nightly_02_00
+            name: Git Sync Nightly
+            secondary_info: last-triggered
+
+      # Timers
+      - type: entities
+        title: ⏱️ Active Timers
+        show_header_toggle: false
+        entities:
+          - entity: timer.purifier_auto_timer
+            name: Purifier Auto-off Timer
+
+      # System Info
+      - type: entities
+        title: 💻 System Info
+        show_header_toggle: false
+        entities:
+          - entity: sensor.processor_use
+            name: CPU Usage
+          - entity: sensor.memory_use_percent
+            name: Memory Usage
+          - entity: sensor.disk_use_percent
+            name: Disk Usage
+          - entity: sensor.last_boot
+            name: Last Boot
+
+      # Database Info
+      - type: markdown
+        title: 🗄️ Database
+        content: |
+          **Type:** MariaDB (configured)
+          **Recorder:** Active
+          
+          Database size and purge info available in System Settings.
+
+      # HACS Status
+      - type: entities
+        title: 📦 HACS Updates
+        show_header_toggle: false
+        entities:
+          - entity: update.mini_graph_card_update
+            name: Mini Graph Card
+
+  # Development/Testing View
+  - title: Testing
+    path: testing
+    icon: mdi:test-tube
+    cards:
+      # Dashboard Testing
+      - type: markdown
+        title: 🧪 Dashboard Testing
+        content: |
+          **Active Test Dashboards:**
+          - [Minimalist](#/lovelace-minimalist/home)
+          - [Card Based](#/lovelace-cards/home)
+          - [Functional](#/lovelace-functional/home)
+          
+          Take notes on what you like/dislike!
+
+      # Test All Lights
+      - type: entities
+        title: 💡 Light Testing
+        show_header_toggle: false
+        entities:
+          - type: button
+            name: Test All Lights ON
+            icon: mdi:lightbulb-on
+            action_name: Test
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id: light.all_lights
+                brightness_pct: 100
+
+          - type: button
+            name: Test Light Sequence
+            icon: mdi:lightbulb-multiple
+            action_name: Test
+            tap_action:
+              action: call-service
+              service: button.press
+              service_data:
+                entity_id: input_button.light_sequence
+
+          - type: button
+            name: All Lights OFF
+            icon: mdi:lightbulb-off
+            action_name: Off
+            tap_action:
+              action: call-service
+              service: light.turn_off
+              service_data:
+                entity_id: light.all_lights
+
+      # Test Individual Rooms
+      - type: grid
+        title: Test by Room
+        columns: 2
+        cards:
+          - type: button
+            name: Kitchen ON
+            icon: mdi:silverware-fork-knife
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id:
+                  - light.kitchen_bench
+                  - light.kitchen_strip
+
+          - type: button
+            name: Living Room ON
+            icon: mdi:sofa
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id:
+                  - light.floor_lamp
+                  - light.tv_light
+
+          - type: button
+            name: Bedroom ON
+            icon: mdi:bed
+            tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id: light.bedroom
+
+          - type: button
+            name: All OFF
+            icon: mdi:lightbulb-off
+            tap_action:
+              action: call-service
+              service: light.turn_off
+              service_data:
+                entity_id: light.all_lights
+
+      # Climate Testing
+      - type: entities
+        title: 🌡️ Climate Testing
+        entities:
+          - entity: climate.living_room_air_conditioner
+          - entity: sensor.living_room_temp
+          - entity: sensor.living_room_humidity
+
+      # Air Purifier Testing
+      - type: entities
+        title: 💨 Air Purifier Testing
+        entities:
+          - entity: fan.living_room_air_purifer
+          - type: button
+            name: Set Auto Mode
+            icon: mdi:fan-auto
+            action_name: Set
+            tap_action:
+              action: call-service
+              service: fan.set_preset_mode
+              service_data:
+                entity_id: fan.living_room_air_purifer
+                preset_mode: auto
+
+          - type: button
+            name: Set 100% Speed
+            icon: mdi:fan-speed-3
+            action_name: Set
+            tap_action:
+              action: call-service
+              service: fan.set_percentage
+              service_data:
+                entity_id: fan.living_room_air_purifer
+                percentage: 100
+
+      # Entity Browser
+      - type: markdown
+        title: 🔍 Quick Links
+        content: |
+          **Development Tools:**
+          - [Developer Tools → States](/developer-tools/state)
+          - [Developer Tools → Services](/developer-tools/service)
+          - [System Logs](/config/logs)
+          - [System Info](/config/info)
+          - [HACS](/hacs)
+          
+          **Settings:**
+          - [Automations](/config/automation/dashboard)
+          - [Scripts](/config/script/dashboard)
+          - [Scenes](/config/scene/dashboard)
+          - [Dashboards](/config/lovelace/dashboards)
+
+  # Logs & Diagnostics
+  - title: Logs
+    path: logs
+    icon: mdi:math-log
+    cards:
+      - type: markdown
+        title: 📜 System Logs
+        content: |
+          [View Full System Logs →](/config/logs)
+          
+          Common issues to check:
+          - Entity not found errors
+          - Integration errors
+          - Automation triggers
+          - Template errors
+
+      - type: markdown
+        title: 🔍 Troubleshooting Checklist
+        content: |
+          **If dashboards not showing:**
+          - [ ] Check configuration.yaml for errors
+          - [ ] Verify YAML files exist in /config/dashboards/
+          - [ ] Check System Logs for errors
+          - [ ] Try clearing browser cache (Ctrl+Shift+R)
+          
+          **If entities not available:**
+          - [ ] Check integration is connected
+          - [ ] Restart integration
+          - [ ] Check entity ID matches config
+          
+          **If automations not triggering:**
+          - [ ] Check automation is enabled
+          - [ ] Check trigger conditions
+          - [ ] Review automation trace
+          - [ ] Check last triggered time
+
+      - type: button
+        name: View System Logs
+        icon: mdi:text-box-search
+        tap_action:
+          action: navigate
+          navigation_path: /config/logs
+        
+      - type: button
+        name: Developer Tools - Services
+        icon: mdi:tools
+        tap_action:
+          action: navigate
+          navigation_path: /developer-tools/service
