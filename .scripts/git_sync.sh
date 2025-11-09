@@ -13,4 +13,3 @@ fi
 git fetch origin || true
 git pull --rebase origin "$BRANCH" || true
 git push origin "$BRANCH"
-[200~#
