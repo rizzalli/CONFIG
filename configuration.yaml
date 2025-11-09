@@ -2,6 +2,9 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+#redirect to mariaDB
+recorder:
+  db_url: !secret mariadb_url
 
 #allow cloudflare tunnel
 http:
