@@ -197,8 +197,7 @@ views:
             name: Disk Usage
           - entity: sensor.system_monitor_last_boot
             name: Raspberry Pi Last Boot
-          - entity: sensor.uptime
-            name: Home Assistant Uptime
+
 
       # Live Log - removed (file sensor deprecated)
       # To see logs, use: Settings → System → Logs

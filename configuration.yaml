@@ -1,3 +1,5 @@
+# To use the uptime sensor, reference the entity created by the integration (e.g., sensor.uptime) in your dashboards or automations.
+# Do not add 'uptime:' to YAML configuration. Configure via the Home Assistant UI.
 
 # Loads default set of integrations. Do not remove.
 default_config:
@@ -48,7 +50,7 @@ template: !include templates.yaml
 sensor: !include sensors.yaml
 
 # Home Assistant uptime sensor
-uptime:
+
 
 # Example configuration.yaml entry
 usage_prediction:
