@@ -25,7 +25,11 @@ DATE="$(date -u '+%Y-%m-%d %H:%M:%S UTC')"
   chmod 755 /config && echo "✔ Permissions OK"
 
   echo "- Verifying Git remote"
-  git remote -v
+  if git remote get-url origin >/dev/null 2>&1; then
+    echo "✔ Git remote configured"
+  else
+    echo "❌ ERROR: Git remote not configured"
+  fi
 
   echo "- Checking auth (dry-run fetch)"
   if git fetch --dry-run >/dev/null 2>&1; then
