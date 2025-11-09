@@ -45,7 +45,7 @@ views:
       - type: entities
         title: Air Purifier
         entities:
-          - entity: fan.living_room_air_purifer
+          - entity: fan.living_room_air_purifier
             name: Purifier
           - entity: sensor.air_quality
             name: Air Quality
@@ -90,38 +90,13 @@ views:
     icon: mdi:silverware-fork-knife
     cards:
       # Kitchen Header with quick toggle
-      - type: horizontal-stack
-        cards:
-          - type: button
-            entity: light.kitchen_bench
-            name: Bench Light
-            show_state: true
-            tap_action:
-              action: toggle
-            hold_action:
-              action: more-info
-          
-          - type: button
-            entity: light.kitchen_strip
-            name: Strip Light
-            show_state: true
-            tap_action:
-              action: toggle
-            hold_action:
-              action: more-info
-
-      # Detailed Individual Controls
       - type: entities
-        title: Kitchen - Individual Controls
+        title: Kitchen Lights
         entities:
           - entity: light.kitchen_bench
             name: Bench Light
-            type: custom:slider-entity-row
-            secondary_info: last-changed
           - entity: light.kitchen_strip
             name: Strip Light
-            type: custom:slider-entity-row
-            secondary_info: last-changed
 
       # Climate info visible from kitchen
       - type: glance

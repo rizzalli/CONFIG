@@ -6,7 +6,6 @@ views:
   - title: Home Overview
     path: home
     icon: mdi:home
-    type: custom:grid-layout
     cards:
       # Welcome Header with Person Status
       - type: markdown
@@ -62,33 +61,19 @@ views:
         tap_action:
           action: navigate
           navigation_path: /lovelace/kitchen
-        entities:
-          - light.kitchen_bench
-          - light.kitchen_strip
-
-      - type: custom:room-summary-card
-        title: 🛋️ Living Room
-        icon: mdi:sofa
-        tap_action:
-          action: navigate
-          navigation_path: /lovelace/living-room
-        entities:
-          - light.floor_lamp
-          - light.tv_light
-          - climate.living_room_air_conditioner
-          - fan.living_room_air_purifer
-
-      - type: custom:room-summary-card
-        title: 🛏️ Bedroom
-        icon: mdi:bed
-        tap_action:
-          action: navigate
-          navigation_path: /lovelace/bedroom
-        entities:
-          - light.bedroom
-
-      # Climate Overview
-      - type: vertical-stack
+        - type: entities
+          title: 💨 Air Purifier
+          icon: mdi:air-purifier
+          show_header_toggle: true
+          entities:
+            - entity: fan.living_room_air_purifier
+              name: Power
+            - entity: sensor.filter_life
+              name: Filter Life
+            - entity: sensor.air_quality
+              name: Air Quality
+            - entity: timer.purifier_auto_timer
+              name: Auto Timer
         cards:
           - type: custom:mini-graph-card
             name: Temperature & Humidity
@@ -115,7 +100,7 @@ views:
         icon: mdi:air-purifier
         show_header_toggle: true
         entities:
-          - entity: fan.living_room_air_purifer
+          - entity: fan.living_room_air_purifier
             name: Power
           - type: custom:bar-card
             entity: sensor.filter_life
@@ -188,17 +173,10 @@ views:
       - type: entities
         title: Individual Lights
         entities:
-          - type: custom:slider-entity-row
-            entity: light.kitchen_bench
+          - entity: light.kitchen_bench
             name: Bench Light
-            toggle: true
-            full_row: false
-          
-          - type: custom:slider-entity-row
-            entity: light.kitchen_strip
+          - entity: light.kitchen_strip
             name: Strip Light
-            toggle: true
-            full_row: false
 
       # Environment Info
       - type: horizontal-stack
@@ -263,7 +241,7 @@ views:
         cards:
           - type: entities
             entities:
-              - entity: fan.living_room_air_purifer
+              - entity: fan.living_room_air_purifier
                 name: Purifier
               - entity: sensor.air_quality
                 name: Air Quality

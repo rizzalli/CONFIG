@@ -7,9 +7,9 @@ views:
     path: admin
     icon: mdi:tools
     badges:
-      - entity: sensor.processor_use
-      - entity: sensor.memory_use_percent
-      - entity: sensor.disk_use_percent
+      - entity: sensor.system_monitor_processor_use
+      - entity: sensor.system_monitor_memory_usage
+      - entity: sensor.system_monitor_disk_usage
     cards:
       # Quick Actions
       - type: entities
@@ -150,11 +150,10 @@ views:
               data:
                 keep_days: 365
                 repack: true
-        footer:
-          type: markdown
-          content: |
-            Note: Home Assistant doesn't support different retention by domain.
-            Use rolling 30-day usage sensors (added) for lights/fans while keeping 365 days globally.
+      - type: markdown
+        content: |
+          Note: Home Assistant doesn't support different retention by domain.
+          Use rolling 30-day usage sensors (added) for lights/fans while keeping 365 days globally.
 
       # Current Automations Status
       - type: entities
@@ -190,13 +189,13 @@ views:
         title: 💻 System Info
         show_header_toggle: false
         entities:
-          - entity: sensor.processor_use
+          - entity: sensor.system_monitor_processor_use
             name: CPU Usage
-          - entity: sensor.memory_use_percent
+          - entity: sensor.system_monitor_memory_usage
             name: Memory Usage
-          - entity: sensor.disk_use_percent
+          - entity: sensor.system_monitor_disk_usage
             name: Disk Usage
-          - entity: sensor.last_boot
+          - entity: sensor.system_monitor_last_boot
             name: Last Boot
 
       # Live Log Tail (last line)
@@ -217,19 +216,42 @@ views:
           
           Database size and purge info available in System Settings.
 
-      # HACS Status
-      - type: entities
-        title: 📦 HACS Updates
-        show_header_toggle: false
-        entities:
-          - entity: update.mini_graph_card_update
-            name: Mini Graph Card
+      # HACS Status (removed - entity not found)
 
   # Development/Testing View
   - title: Testing
     path: testing
     icon: mdi:test-tube
     cards:
+      # Daily Health Summary
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: ✅ Daily Health Summary
+            entities:
+              - entity: sensor.unavailable_entities
+                name: Unavailable Entities
+              - entity: sensor.automations_off
+                name: Automations Off
+              - entity: sensor.last_log_level
+                name: Last Log Level
+          - type: horizontal-stack
+            cards:
+              - type: gauge
+                entity: sensor.system_monitor_processor_use
+                name: CPU
+                min: 0
+                max: 100
+              - type: gauge
+                entity: sensor.system_monitor_memory_usage
+                name: Memory
+                min: 0
+                max: 100
+              - type: gauge
+                entity: sensor.system_monitor_disk_usage
+                name: Disk
+                min: 0
+                max: 100
       # Dashboard Testing
       - type: markdown
         title: 🧪 Dashboard Testing
@@ -334,7 +356,7 @@ views:
       - type: entities
         title: 💨 Air Purifier Testing
         entities:
-          - entity: fan.living_room_air_purifer
+          - entity: fan.living_room_air_purifier
           - type: button
             name: Set Auto Mode
             icon: mdi:fan-auto
@@ -343,7 +365,7 @@ views:
               action: call-service
               service: fan.set_preset_mode
               service_data:
-                entity_id: fan.living_room_air_purifer
+                entity_id: fan.living_room_air_purifier
                 preset_mode: auto
 
           - type: button
@@ -354,7 +376,7 @@ views:
               action: call-service
               service: fan.set_percentage
               service_data:
-                entity_id: fan.living_room_air_purifer
+                entity_id: fan.living_room_air_purifier
                 percentage: 100
 
       # Entity Browser

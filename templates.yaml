@@ -38,6 +38,27 @@
             else state_attr('fan.living_room_air_purifer', 'air_quality')
           }}
 
+  # Daily health summary helpers
+  - sensor:
+      - name: "Unavailable Entities"
+        unique_id: ha_unavailable_entities_count
+        icon: mdi:alert-circle
+        state: >-
+          {{ states | selectattr('state', 'in', ['unavailable', 'unknown']) | list | count }}
+
+      - name: "Automations Off"
+        unique_id: ha_automations_off_count
+        icon: mdi:robot-off
+        state: >-
+          {{ states.automation | selectattr('state', 'eq', 'off') | list | count }}
+
+      - name: "Last Log Level"
+        unique_id: ha_last_log_level
+        icon: mdi:file-document-alert
+        state: >-
+          {% set line = states('sensor.home_assistant_log_last_line')|lower %}
+          {% if 'error' in line %}error{% elif 'warning' in line %}warning{% elif line %}info{% else %}unknown{% endif %}
+
       - name: "Filter Life"
         unique_id: vesync_filter_life
         unit_of_measurement: "%"

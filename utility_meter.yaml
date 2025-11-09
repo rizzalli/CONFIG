@@ -1,0 +1,19 @@
+# Utility meter definitions for long-term energy analytics
+# IMPORTANT: Replace sensor.energy_consumption with your actual energy sensor (kWh, state_class: total_increasing)
+# Examples: sensor.grid_consumption, sensor.total_energy, sensor.shelly_xxx_energy, etc.
+
+energy_daily:
+  source: sensor.energy_consumption
+  cycle: daily
+
+energy_monthly:
+  source: sensor.energy_consumption
+  cycle: monthly
+
+# If you have solar production, uncomment and set the correct source sensors
+#solar_production_daily:
+#  source: sensor.solar_energy_production
+#  cycle: daily
+#solar_production_monthly:
+#  source: sensor.solar_energy_production
+#  cycle: monthly

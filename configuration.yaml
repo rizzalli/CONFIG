@@ -93,6 +93,9 @@ frontend:
     - /local/card-mod.js
   themes: !include_dir_merge_named themes
 
+# Utility meters (daily/monthly energy). Set your source sensor in utility_meter.yaml
+utility_meter: !include utility_meter.yaml
+
 # Lovelace dashboards
 lovelace:
   mode: storage  # Keep your existing UI-created dashboards

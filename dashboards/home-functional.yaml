@@ -268,9 +268,9 @@ views:
       - type: entities
         title: Air Purifier
         show_header_toggle: true
-        toggle_entity: fan.living_room_air_purifer
+        toggle_entity: fan.living_room_air_purifier
         entities:
-          - entity: fan.living_room_air_purifer
+          - entity: fan.living_room_air_purifier
             name: Power
           - entity: sensor.air_quality
             name: Air Quality
