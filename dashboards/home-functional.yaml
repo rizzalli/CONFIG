@@ -250,15 +250,10 @@ views:
       - type: entities
         title: Lighting Controls
         entities:
-          - type: custom:slider-entity-row
-            entity: light.floor_lamp
+          - entity: light.floor_lamp
             name: Floor Lamp
-            toggle: true
-
-          - type: custom:slider-entity-row
-            entity: light.tv_light
+          - entity: light.tv_light
             name: TV Light
-            toggle: true
 
       # Entertainment
       - type: media-control

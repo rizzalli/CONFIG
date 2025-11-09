@@ -71,6 +71,24 @@ views:
               action: call-service
               service: template.reload
 
+          - type: button
+            name: Backup Now
+            icon: mdi:cloud-upload
+            action_name: Create
+            tap_action:
+              action: call-service
+              service: backup.create
+              data:
+                name: "Manual backup {{ now().strftime('%Y-%m-%d %H:%M') }}"
+
+          - type: button
+            name: Check Configuration
+            icon: mdi:check-decagram
+            action_name: Check
+            tap_action:
+              action: call-service
+              service: homeassistant.check_config
+
       # Git Status Info (if you add git sensor)
       - type: markdown
         title: 📋 Git Info
@@ -81,6 +99,62 @@ views:
           **Quick Git Commands:**
           - Use "Git Sync" button above to pull/push
           - Auto-sync runs on HA start & nightly at 2 AM
+
+      # Recorder Maintenance
+      - type: entities
+        title: 🗄️ Recorder Maintenance
+        show_header_toggle: false
+        entities:
+          - type: button
+            name: Purge (30 days) + Repack
+            icon: mdi:calendar-30
+            action_name: Run
+            tap_action:
+              action: call-service
+              service: recorder.purge
+              data:
+                keep_days: 30
+                repack: true
+            confirmation:
+              text: This purges ALL history older than 30 days. Continue?
+
+          - type: button
+            name: Purge (90 days) + Repack
+            icon: mdi:calendar
+            action_name: Run
+            tap_action:
+              action: call-service
+              service: recorder.purge
+              data:
+                keep_days: 90
+                repack: true
+
+          - type: button
+            name: Purge (180 days) + Repack
+            icon: mdi:calendar
+            action_name: Run
+            tap_action:
+              action: call-service
+              service: recorder.purge
+              data:
+                keep_days: 180
+                repack: true
+
+          - type: button
+            name: Purge (365 days) + Repack
+            icon: mdi:calendar
+            action_name: Run
+            tap_action:
+              action: call-service
+              service: recorder.purge
+              data:
+                keep_days: 365
+                repack: true
+        footer:
+          type: markdown
+          content: |
+            Note: Home Assistant doesn't support different retention by domain.
+            Use rolling 30-day usage sensors (added) for lights/fans while keeping 365 days globally.
 
       # Current Automations Status
       - type: entities
@@ -124,6 +198,15 @@ views:
             name: Disk Usage
           - entity: sensor.last_boot
             name: Last Boot
+
+      # Live Log Tail (last line)
+      - type: entities
+        title: 🪵 Live Log (last line)
+        entities:
+          - entity: sensor.maintenance_log_last_line
+            name: Maintenance
+          - entity: sensor.home_assistant_log_last_line
+            name: Home Assistant
 
       # Database Info
       - type: markdown

@@ -1,0 +1,62 @@
+# History and log sensors
+
+# Rolling 30-day usage for key entities (drives dashboard insights without massive DB growth)
+- platform: history_stats
+  name: Floor Lamp On (30d)
+  entity_id: light.floor_lamp
+  state: "on"
+  type: time
+  start: "{{ now() - timedelta(days=30) }}"
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: TV Light On (30d)
+  entity_id: light.tv_light
+  state: "on"
+  type: time
+  start: "{{ now() - timedelta(days=30) }}"
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: Kitchen Bench On (30d)
+  entity_id: light.kitchen_bench
+  state: "on"
+  type: time
+  start: "{{ now() - timedelta(days=30) }}"
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: Kitchen Strip On (30d)
+  entity_id: light.kitchen_strip
+  state: "on"
+  type: time
+  start: "{{ now() - timedelta(days=30) }}"
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: Bedroom Light On (30d)
+  entity_id: light.bedroom
+  state: "on"
+  type: time
+  start: "{{ now() - timedelta(days=30) }}"
+  end: "{{ now() }}"
+
+# Optional: Fan runtime last 30 days (if entity id exists)
+#- platform: history_stats
+#  name: Purifier On (30d)
+#  entity_id: fan.living_room_air_purifier
+#  state: "on"
+#  type: time
+#  start: "{{ now() - timedelta(days=30) }}"
+#  end: "{{ now() }}"
+
+# Log tail sensors (last line)
+- platform: file
+  name: Maintenance Log (last line)
+  file_path: /config/maintenance.log
+  value_template: "{{ value | truncate(255) }}"
+
+- platform: file
+  name: Home Assistant Log (last line)
+  file_path: /config/home-assistant.log
+  value_template: "{{ value | truncate(255) }}"

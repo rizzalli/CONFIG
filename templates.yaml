@@ -26,3 +26,42 @@
         unique_id: living_room_air_conditioner_temp2
         unit_of_measurement: "°C"
         state: "{{ state_attr('climate.living_room_air_conditioner', 'current_temperature') }}"
+
+  # Air purifier attribute sensors (with fallback for entity_id typo)
+  - sensor:
+      - name: "Air Quality"
+        unique_id: vesync_air_quality
+        state: >-
+          {{
+            state_attr('fan.living_room_air_purifier', 'air_quality')
+            if state_attr('fan.living_room_air_purifier', 'air_quality') is not none
+            else state_attr('fan.living_room_air_purifer', 'air_quality')
+          }}
+
+      - name: "Filter Life"
+        unique_id: vesync_filter_life
+        unit_of_measurement: "%"
+        state: >-
+          {{
+            state_attr('fan.living_room_air_purifier', 'filter_life')
+            if state_attr('fan.living_room_air_purifier', 'filter_life') is not none
+            else state_attr('fan.living_room_air_purifer', 'filter_life')
+          }}
+
+      - name: "Mode"
+        unique_id: vesync_mode
+        state: >-
+          {{
+            state_attr('fan.living_room_air_purifier', 'mode')
+            if state_attr('fan.living_room_air_purifier', 'mode') is not none
+            else state_attr('fan.living_room_air_purifer', 'mode')
+          }}
+
+      - name: "Screen Status"
+        unique_id: vesync_screen_status
+        state: >-
+          {{
+            state_attr('fan.living_room_air_purifier', 'screen_status')
+            if state_attr('fan.living_room_air_purifier', 'screen_status') is not none
+            else state_attr('fan.living_room_air_purifer', 'screen_status')
+          }}

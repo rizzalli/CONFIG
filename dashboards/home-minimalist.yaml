@@ -42,7 +42,7 @@ views:
         name: Climate Control
 
       # Air Purifier Control
-      - type: custom:room-summary-card
+      - type: entities
         title: Air Purifier
         entities:
           - entity: fan.living_room_air_purifer

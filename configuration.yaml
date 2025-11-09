@@ -5,6 +5,21 @@ default_config:
 #redirect to mariaDB
 recorder:
   db_url: !secret mariadb_url
+  purge_keep_days: 365
+  auto_purge: true
+  exclude:
+    domains:
+      - persistent_notification
+      - updater
+      - camera
+      - conversation
+      - notify
+      - tts
+      - siren
+      - input_button
+      - scene
+    entities:
+      - light.all_lights
 
 #git push script
 shell_command:
@@ -28,6 +43,9 @@ http:
 
 #include templates.yaml file
 template: !include templates.yaml
+
+# additional sensors (history_stats + log tails)
+sensor: !include sensors.yaml
 
 # Example configuration.yaml entry
 usage_prediction:

@@ -273,8 +273,6 @@ views:
                 icon: mdi:air-filter
               - entity: sensor.mode
                 name: Mode
-              - entity: sensor.screen_status
-                name: Screen
               - entity: timer.purifier_auto_timer
                 name: Auto Timer
 
