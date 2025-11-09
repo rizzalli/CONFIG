@@ -47,6 +47,9 @@ template: !include templates.yaml
 # additional sensors (history_stats + log tails)
 sensor: !include sensors.yaml
 
+# Home Assistant uptime sensor
+uptime:
+
 # Example configuration.yaml entry
 usage_prediction:
 

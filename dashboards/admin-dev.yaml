@@ -196,7 +196,9 @@ views:
           - entity: sensor.system_monitor_disk_usage
             name: Disk Usage
           - entity: sensor.system_monitor_last_boot
-            name: Last Boot
+            name: Raspberry Pi Last Boot
+          - entity: sensor.uptime
+            name: Home Assistant Uptime
 
       # Live Log - removed (file sensor deprecated)
       # To see logs, use: Settings → System → Logs
@@ -343,6 +345,12 @@ views:
           - entity: climate.living_room_air_conditioner
           - entity: sensor.living_room_temp
           - entity: sensor.living_room_humidity
+          - type: section
+            label: Calibration Settings
+          - entity: number.living_room_air_conditioner_temperature_calibration
+            name: Temperature Calibration
+          - entity: number.living_room_air_conditioner_humidity_calibration
+            name: Humidity Calibration
 
       # Air Purifier Testing
       - type: entities
