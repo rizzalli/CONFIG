@@ -61,19 +61,33 @@ views:
         tap_action:
           action: navigate
           navigation_path: /lovelace/kitchen
-        - type: entities
-          title: 💨 Air Purifier
-          icon: mdi:air-purifier
-          show_header_toggle: true
-          entities:
-            - entity: fan.living_room_air_purifier
-              name: Power
-            - entity: sensor.filter_life
-              name: Filter Life
-            - entity: sensor.air_quality
-              name: Air Quality
-            - entity: timer.purifier_auto_timer
-              name: Auto Timer
+        entities:
+          - light.kitchen_bench
+          - light.kitchen_strip
+
+      - type: custom:room-summary-card
+        title: 🛋️ Living Room
+        icon: mdi:sofa
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/living-room
+        entities:
+          - light.floor_lamp
+          - light.tv_light
+          - climate.living_room_air_conditioner
+          - fan.living_room_air_purifier
+
+      - type: custom:room-summary-card
+        title: 🛏️ Bedroom
+        icon: mdi:bed
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/bedroom
+        entities:
+          - light.bedroom
+
+      # Climate Overview
+      - type: vertical-stack
         cards:
           - type: custom:mini-graph-card
             name: Temperature & Humidity
@@ -102,22 +116,8 @@ views:
         entities:
           - entity: fan.living_room_air_purifier
             name: Power
-          - type: custom:bar-card
-            entity: sensor.filter_life
+          - entity: sensor.filter_life
             name: Filter Life
-            positions:
-              icon: 'off'
-              name: inside
-            severity:
-              - color: '#c0392b'
-                from: 0
-                to: 25
-              - color: '#f39c12'
-                from: 26
-                to: 50
-              - color: '#27ae60'
-                from: 51
-                to: 100
           - entity: sensor.air_quality
             name: Air Quality
           - entity: timer.purifier_auto_timer
