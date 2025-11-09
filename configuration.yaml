@@ -115,26 +115,8 @@ lovelace:
       type: module
     - url: /hacsfiles/lovelace-layout-card/layout-card.js
       type: module
-  # Add YAML-based test dashboards
+  # YAML-based admin dashboard
   dashboards:
-    lovelace-minimalist:
-      mode: yaml
-      title: Minimalist
-      icon: mdi:view-compact
-      show_in_sidebar: true
-      filename: dashboards/home-minimalist.yaml
-    lovelace-cards:
-      mode: yaml
-      title: Card Based
-      icon: mdi:view-dashboard
-      show_in_sidebar: true
-      filename: dashboards/home-card-based.yaml
-    lovelace-functional:
-      mode: yaml
-      title: Functional
-      icon: mdi:view-grid
-      show_in_sidebar: true
-      filename: dashboards/home-functional.yaml
     lovelace-admin:
       mode: yaml
       title: Admin & Dev
