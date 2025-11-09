@@ -50,13 +50,6 @@
 #  start: "{{ now() - timedelta(days=30) }}"
 #  end: "{{ now() }}"
 
-# Log tail sensors (last line)
-- platform: file
-  name: Maintenance Log (last line)
-  file_path: /config/maintenance.log
-  value_template: "{{ value | truncate(255) }}"
-
-- platform: file
-  name: Home Assistant Log (last line)
-  file_path: /config/home-assistant.log
-  value_template: "{{ value | truncate(255) }}"
+# Log tail sensors removed - file platform is deprecated
+# Use command_line sensor or logbook instead
+# For now, remove these entries to avoid config errors
