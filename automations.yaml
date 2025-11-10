@@ -10,10 +10,10 @@
   actions:
   - parallel:
     - sequence:
-      - action: fan.set_percentage
+      - action: fan.set_preset_mode
         metadata: {}
         data:
-          percentage: 100
+          preset_mode: auto
         target:
           device_id: c6c759a3bbad55083ec92fe4f1b31966
       - action: timer.start
@@ -22,12 +22,6 @@
           duration: 02:00:00
         target:
           entity_id: timer.purifier_auto_timer
-      - action: fan.set_preset_mode
-        metadata: {}
-        data:
-          preset_mode: auto
-        target:
-          device_id: c6c759a3bbad55083ec92fe4f1b31966
     - action: light.turn_off
       metadata: {}
       data: {}
