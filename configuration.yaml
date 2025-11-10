@@ -94,8 +94,8 @@ automation: !include automations.yaml
 
 
 frontend:
-  extra_module_url:
-    - /local/card-mod.js
+#  extra_module_url:
+ #   - /local/card-mod.js
   themes: !include_dir_merge_named themes
 
 # Utility meters (daily/monthly energy). Set your source sensor in utility_meter.yaml
