@@ -103,18 +103,18 @@ utility_meter: !include utility_meter.yaml
 
 # Lovelace dashboards
 lovelace:
-  mode: storage  # Keep your existing UI-created dashboards
-  resources:
-    - url: /local/mini-graph-card-bundle.js
-      type: module
-    - url: /hacsfiles/lovelace-card-mod/card-mod.js
-      type: module
-    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
-      type: module
-    - url: /hacsfiles/room-summary-card/room-summary-card.js
-      type: module
-    - url: /hacsfiles/lovelace-layout-card/layout-card.js
-      type: module
+#  mode: storage  # Keep your existing UI-created dashboards
+#  resources:
+#    - url: /local/mini-graph-card-bundle.js
+#      type: module
+#    - url: /hacsfiles/lovelace-card-mod/card-mod.js
+#      type: module
+#    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+#      type: module
+#    - url: /hacsfiles/room-summary-card/room-summary-card.js
+#      type: module
+#    - url: /hacsfiles/lovelace-layout-card/layout-card.js
+#      type: module
   # YAML-based admin dashboard
   dashboards:
     lovelace-admin:
