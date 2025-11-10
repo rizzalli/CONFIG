@@ -6,3 +6,4 @@ secrets.yaml
 maintenance.log
 home-assistant.log*
 .cloud/
+.ha_run.lock
