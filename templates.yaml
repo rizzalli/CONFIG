@@ -45,8 +45,7 @@
         icon: mdi:alert-circle
         unit_of_measurement: "entities"
         state: >-
-          {{ states | rejectattr('entity_id', 'in', ['sensor.unavailable_entities', 'sensor.unavailable_entities_2']) 
-             | selectattr('state', 'in', ['unavailable', 'unknown']) | list | count }}
+          {{ states | selectattr('state', 'in', ['unavailable', 'unknown']) | list | count }}
 
       - name: "Automations Off"
         unique_id: vesync_automations_off_count
