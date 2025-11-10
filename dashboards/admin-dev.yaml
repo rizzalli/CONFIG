@@ -362,16 +362,23 @@ views:
                 entity_id: fan.living_room_air_purifier
                 preset_mode: auto
 
-          - type: button
-            name: Set 100% Speed
-            icon: mdi:fan-speed-3
-            action_name: Set
-            tap_action:
-              action: call-service
-              service: fan.set_percentage
-              service_data:
-                entity_id: fan.living_room_air_purifier
-                percentage: 100
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: fan.living_room_air_purifier
+                state_not: auto
+                attribute: preset_mode
+            row:
+              type: button
+              name: Set 100% Speed
+              icon: mdi:fan-speed-3
+              action_name: Set
+              tap_action:
+                action: call-service
+                service: fan.set_percentage
+                service_data:
+                  entity_id: fan.living_room_air_purifier
+                  percentage: 100
 
       # Entity Browser
       - type: markdown
