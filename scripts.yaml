@@ -26,3 +26,12 @@ heat_on_duplicate:
     hvac_mode: 'off'
   alias: Heat On (Duplicate)
   description: Turns off heat
+git_sync_and_update:
+  alias: Git Sync and Update Sensor
+  sequence:
+    - service: shell_command.git_sync
+    - delay: '00:00:05'
+    - service: homeassistant.update_entity
+      target:
+        entity_id: sensor.last_git_sync_output
+  description: Run git sync script and refresh the last-git-sync sensor on demand
