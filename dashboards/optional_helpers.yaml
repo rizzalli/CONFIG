@@ -20,6 +20,46 @@ input_select:
       - "Off"
     icon: mdi:lightbulb-group
 
+  kitchen_bench_scene_cycle_day:
+    name: Kitchen Bench Scenes (Day)
+    options:
+      - scene.kitchen_concentrate
+      - scene.kitchen_energize
+      - scene.kitchen_read
+      - scene.kitchen_relax
+    initial: scene.kitchen_concentrate
+    icon: mdi:weather-sunny
+
+  kitchen_bench_scene_cycle_night:
+    name: Kitchen Bench Scenes (Night)
+    options:
+      - scene.kitchen_concentrate
+      - scene.kitchen_read
+      - scene.kitchen_relax
+      - scene.kitchen_nightlight
+    initial: scene.kitchen_nightlight
+    icon: mdi:weather-night
+
+  kitchen_strip_scene_cycle_day:
+    name: Kitchen Strip Scenes (Day)
+    options:
+      - scene.kitchen_strip_concentrate
+      - scene.kitchen_strip_energize
+      - scene.kitchen_strip_read
+      - scene.kitchen_strip_relax
+    initial: scene.kitchen_strip_concentrate
+    icon: mdi:weather-sunny
+
+  kitchen_strip_scene_cycle_night:
+    name: Kitchen Strip Scenes (Night)
+    options:
+      - scene.kitchen_strip_concentrate
+      - scene.kitchen_strip_read
+      - scene.kitchen_strip_relax
+      - scene.kitchen_strip_nightlight
+    initial: scene.kitchen_strip_nightlight
+    icon: mdi:weather-night
+
 # Input boolean for movie mode
 input_boolean:
   movie_mode:

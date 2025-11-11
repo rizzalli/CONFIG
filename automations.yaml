@@ -180,3 +180,87 @@
       entity_id: light.kitchen_bench
   mode: parallel
   max: 10
+
+- id: 'hue_dimmer_bench_cycle'
+  alias: Hue Dimmer Kitchen - Bench Scene Cycle
+  description: Cycle bench scenes (day/night) on top button
+  triggers:
+    - device_id: a41ed2d0631e638d6b808fc1ee30f841
+      domain: hue
+      type: initial_press
+      subtype: 3
+      trigger: device
+    - device_id: a41ed2d0631e638d6b808fc1ee30f841
+      domain: hue
+      type: repeat
+      subtype: 3
+      trigger: device
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: sun.sun
+              state: 'above_horizon'
+          sequence:
+            - service: input_select.select_next
+              target:
+                entity_id: input_select.kitchen_bench_scene_cycle_day
+            - delay: '00:00:00.150'
+            - service: scene.turn_on
+              data:
+                entity_id: "{{ states('input_select.kitchen_bench_scene_cycle_day') }}"
+        - conditions:
+            - condition: state
+              entity_id: sun.sun
+              state: 'below_horizon'
+          sequence:
+            - service: input_select.select_next
+              target:
+                entity_id: input_select.kitchen_bench_scene_cycle_night
+            - delay: '00:00:00.150'
+            - service: scene.turn_on
+              data:
+                entity_id: "{{ states('input_select.kitchen_bench_scene_cycle_night') }}"
+  mode: single
+
+- id: 'hue_dimmer_strip_cycle'
+  alias: Hue Dimmer Kitchen - Strip Scene Cycle
+  description: Cycle strip scenes (day/night) on bottom button
+  triggers:
+    - device_id: a41ed2d0631e638d6b808fc1ee30f841
+      domain: hue
+      type: initial_press
+      subtype: 4
+      trigger: device
+    - device_id: a41ed2d0631e638d6b808fc1ee30f841
+      domain: hue
+      type: repeat
+      subtype: 4
+      trigger: device
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: sun.sun
+              state: 'above_horizon'
+          sequence:
+            - service: input_select.select_next
+              target:
+                entity_id: input_select.kitchen_strip_scene_cycle_day
+            - delay: '00:00:00.150'
+            - service: scene.turn_on
+              data:
+                entity_id: "{{ states('input_select.kitchen_strip_scene_cycle_day') }}"
+        - conditions:
+            - condition: state
+              entity_id: sun.sun
+              state: 'below_horizon'
+          sequence:
+            - service: input_select.select_next
+              target:
+                entity_id: input_select.kitchen_strip_scene_cycle_night
+            - delay: '00:00:00.150'
+            - service: scene.turn_on
+              data:
+                entity_id: "{{ states('input_select.kitchen_strip_scene_cycle_night') }}"
+  mode: single
