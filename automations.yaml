@@ -22,5 +22,9 @@
     entity_id:
     - input_button.git_synch
   conditions: []
-  actions: []
+  actions:
+  - action: shell_command.git_sync
+    metadata: {}
+    data: {}
+    response_variable: 'stdout:  stderr:  returncode: '
   mode: single
