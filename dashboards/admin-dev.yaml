@@ -224,8 +224,6 @@ views:
           - type: entities
             title: ✅ Daily Health Summary
             entities:
-              - entity: sensor.unavailable_entities
-                name: Unavailable Entities
               - entity: sensor.automations_off
                 name: Automations Off
           - type: horizontal-stack
