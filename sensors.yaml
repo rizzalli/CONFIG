@@ -53,11 +53,3 @@
 # Log tail sensors removed - file platform is deprecated
 # Use command_line sensor or logbook instead
 # For now, remove these entries to avoid config errors
-
-## Git sync output (on-demand read)
-- platform: command_line
-  name: Last Git Sync Output
-  command: 'bash -c "tail -n 40 /config/.git_sync.log 2>/dev/null || echo \"No git sync log\""'
-  scan_interval: 86400   # daily fallback; updated on-demand via homeassistant.update_entity
-  value_template: '{{ value | replace("\n"," \\n ") | truncate(1000) }}'
-  icon: mdi:history
