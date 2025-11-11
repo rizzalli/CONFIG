@@ -40,13 +40,6 @@
 
   # Daily health summary helpers
   - sensor:
-      - name: "Unavailable Entities"
-        unique_id: vesync_unavailable_entities_count
-        icon: mdi:alert-circle
-        unit_of_measurement: "entities"
-        state: >-
-          {{ states | selectattr('state', 'in', ['unavailable', 'unknown']) | list | count }}
-
       - name: "Automations Off"
         unique_id: vesync_automations_off_count
         icon: mdi:robot-off
