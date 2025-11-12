@@ -30,8 +30,10 @@
   - action: input_text.set_value
     metadata: {}
     data:
-      value: ' >       {{ git_sync_output.stdout if git_sync_output.stdout else git_sync_output.stderr
-        }}'
+      value: " >\n      {% if git_sync_output.stdout | trim != '' %}\n        {{ git_sync_output.stdout
+        }}\n      {% elif git_sync_output.stderr | trim != '' %}\n        {{ git_sync_output.stderr
+        }}\n      {% else %}\n        Return code: {{ git_sync_output.returncode }}\n
+        \     {% endif %}"
     target:
       entity_id: input_text.input_text_git_sync_output
   mode: single
