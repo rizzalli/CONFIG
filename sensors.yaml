@@ -53,9 +53,3 @@
 # Log tail sensors removed - file platform is deprecated
 # Use command_line sensor or logbook instead
 # For now, remove these entries to avoid config errors
-
-- platform: command_line
-  name: Last Git Sync Output
-  command: "tail -n 30 /config/.git_sync.log 2>/dev/null || echo 'No git sync log found'"
-  scan_interval: 0
-  value_template: "{{ value | trim }}"
