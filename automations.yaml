@@ -26,14 +26,14 @@
   - action: shell_command.git_sync
     metadata: {}
     data: {}
-    response_variable: git_synch_output
+    response_variable: git_sync_output
   - action: input_text.set_value
     metadata: {}
     data:
-      value: " >\n      {% if git_sync_output.stdout | trim != '' %}\n        {{ git_sync_output.stdout
-        }}\n      {% elif git_sync_output.stderr | trim != '' %}\n        {{ git_sync_output.stderr
-        }}\n      {% else %}\n        Return code: {{ git_sync_output.returncode }}\n
-        \     {% endif %}"
+      value: "{% if git_sync_output.stdout | trim != '' %}\n  {{ git_sync_output.stdout
+        }}\n{% elif git_sync_output.stderr | trim != '' %}\n  {{ git_sync_output.stderr
+        }}\n{% else %}\n  Return code: {{ git_sync_output.returncode }}\n{% endif
+        %}"
     target:
-      entity_id: input_text.input_text_git_sync_output
+      entity_id: input_text.git_sync_output
   mode: single
