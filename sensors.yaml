@@ -56,7 +56,6 @@
 
 - platform: command_line
   name: Last Git Sync Output
-  command: 'bash -c "tail -n 30 /config/.git_sync.log || echo No git sync log found"'
+  command: "tail -n 30 /config/.git_sync.log 2>/dev/null || echo 'No git sync log found'"
   scan_interval: 0
-  # The raw command output is used as the sensor state. Keep value short by tailing last 30 lines.
-  value_template: '{{ value }}'
+  value_template: "{{ value | trim }}"
