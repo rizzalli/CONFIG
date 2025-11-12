@@ -30,10 +30,11 @@
   - action: input_text.set_value
     metadata: {}
     data:
-      value: "{% if git_sync_output.stdout | trim != '' %}\n  {{ git_sync_output.stdout
-        }}\n{% elif git_sync_output.stderr | trim != '' %}\n  {{ git_sync_output.stderr
-        }}\n{% else %}\n  Return code: {{ git_sync_output.returncode }}\n{% endif
-        %}"
+      value: "{% set out = git_sync_output.stdout | default('', true) %}\n{% set err
+        = git_sync_output.stderr | default('', true) %}\n{% set code = git_sync_output.returncode
+        | default('unknown') %}\n{% if out | trim | length > 0 %}\n  {{ out }}\n{%
+        elif err | trim | length > 0 %}\n  {{ err }}\n{% else %}\n  Return code: {{
+        code }}\n{% endif %}\n"
     target:
       entity_id: input_text.git_sync_output
   mode: single
