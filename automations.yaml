@@ -27,12 +27,17 @@
     metadata: {}
     data: {}
     response_variable: git_sync_output
+  - action: system_log.write
+    metadata: {}
+    data:
+      level: info
+      message: '"git_sync_output = {{ git_sync_output }}"'
   - action: input_text.set_value
     metadata: {}
     data:
-      value: "{% set out = git_sync_output.stdout | default('', true) %}\n{% set err
-        = git_sync_output.stderr | default('', true) %}\n{% set code = git_sync_output.returncode
-        | default('unknown') %}\n{% if out | trim | length > 0 %}\n  {{ out }}\n{%
+      value: "{% set out = git_sync_output.stdout | default('', true) %} {% set err
+        = git_sync_output.stderr | default('', true) %} {% set code = git_sync_output.returncode
+        | default('unknown') %} {% if out | trim | length > 0 %}\n  {{ out }}\n{%
         elif err | trim | length > 0 %}\n  {{ err }}\n{% else %}\n  Return code: {{
         code }}\n{% endif %}\n"
     target:
