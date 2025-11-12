@@ -26,13 +26,12 @@
   - action: shell_command.git_sync
     metadata: {}
     data: {}
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 10
-      milliseconds: 0
-  - target:
-      entity_id: sensor.last_git_sync_output
-    action: homeassistant.update_entity
-    data: {}
+    response_variable: git_synch_output
+  - action: input_text.set_value
+    metadata: {}
+    data:
+      value: ' >       {{ git_sync_output.stdout if git_sync_output.stdout else git_sync_output.stderr
+        }}'
+    target:
+      entity_id: input_text.input_text_git_sync_output
   mode: single
