@@ -50,6 +50,4 @@
 #  start: "{{ now() - timedelta(days=30) }}"
 #  end: "{{ now() }}"
 
-# Log tail sensors removed - file platform is deprecated
-# Use command_line sensor or logbook instead
-# For now, remove these entries to avoid config errors
+
